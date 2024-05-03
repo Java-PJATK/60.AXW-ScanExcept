@@ -30,11 +30,11 @@ How do we handle exceptions? We enclose a fragment of our code where an exceptio
 
 ```java
 try {
-// ...
+    // ...
 } catch(ExcType1 ex) {
-// handling the exception of type ExcType1
+    // handling the exception of type ExcType1
 } catch(ExcType2 ex) {
-// handling the exception of type ExcType2
+    // handling the exception of type ExcType2
 }
 // ... other catch blocks
 ```
@@ -57,13 +57,13 @@ Note that it doesn’t make sense to place a `catch` block corresponding to exce
 Something like
 
 ```java
-    try {
-        // ...
-    } catch(FileNotFoundException e) {
-        // ...
-    } catch(IOException e) {
-        // ...
-    }
+try {
+    // ...
+} catch(FileNotFoundException e) {
+    // ...
+} catch(IOException e) {
+    // ...
+}
 ```
 
 does make sense: if FileNotFoundException occurred, then the first catch will be executed, if it was any other exception derived from IOException — the second one.
@@ -71,13 +71,13 @@ does make sense: if FileNotFoundException occurred, then the first catch will be
 However
 
 ```java
-    try {
-        // ...
-    } catch(IOException e) {
-        // ...
-    } catch(FileNotFoundException e) { // NO!!!
-        // ...
-    }
+try {
+    // ...
+} catch(IOException e) {
+    // ...
+} catch(FileNotFoundException e) { // NO!!!
+    // ...
+}
 ```
 
 is wrong, because `FileNotFoundException` and all other exceptions derived form `IOException` will be caught by the first `catch`; the second is unreachable and hence useless.  
@@ -103,15 +103,15 @@ This example also shows that handling an exception, we can, after doing somethin
 After all `catch` blocks, we can (but we don’t have to) use a **finally block**
 
 ```java
-    try {
-        // ...
-    } catch(ExcType1 e) {
-        // ...
-    } catch(ExcType2 e) {
-        // ...
-    } finally {
-        // ...
-    }
+try {
+    // ...
+} catch(ExcType1 e) {
+    // ...
+} catch(ExcType2 e) {
+    // ...
+} finally {
+    // ...
+}
 ```
 
 The code in `finally` block will always be executed. If there is no error in the `try` block, then all `catch` blocks will be ignored, but `finally` block will be executed; if there is an error in the `try` block, then the corresponding `catch` block (if any) will be executed and, afterwards, the `finally` block (even if there is a return statement in try and/or `catch` blocks!) 
@@ -131,16 +131,16 @@ Finally blocks are very useful when we want to ensure that some resources (open 
 because if any of conditions holds, the resources acquired at the beginning will not be released. However, using `finally`
 
 ```java
-    try {
-        // get resources
-        // ...
-        if ( condition1 ) return;
-        // ...
-        if ( condition2 ) return;
-        // ...
-    } finally {
-        // release resources
-    }
+try {
+    // get resources
+    // ...
+    if ( condition1 ) return;
+    // ...
+    if ( condition2 ) return;
+    // ...
+} finally {
+    // release resources
+}
 ```
 
 we can ensure that the resources will be released no matter what.
